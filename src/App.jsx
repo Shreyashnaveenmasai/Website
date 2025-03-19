@@ -1,14 +1,9 @@
 import * as React from "react";
 
-import { Route, Routes } from "react-router-dom";
-
-import About from "./pages/About";
-import AppRoutes from "./routes";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import AppRoutes from "./routes";
 
 function App() {
     return (
@@ -16,14 +11,15 @@ function App() {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "100vh",
                 pt: "64px",
+                pl: "0px",
+                pr: "0px",
             }}
         >
             <Navbar />
-            <Container sx={{ mt: 4, flex: 1 }}>
+            <Box sx={{ mt: 1, flex: 1, width: "100%" }}>
                 <AppRoutes />
-            </Container>
+            </Box>
             <Footer />
         </Box>
     );

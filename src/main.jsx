@@ -1,9 +1,9 @@
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
-import App from "./App.jsx";
-import { BrowserRouter } from "react-router-dom";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
 
 const theme = createTheme({
     typography: {
@@ -47,20 +47,22 @@ const theme = createTheme({
         },
         button: {
             fontWeight: 500,
-            textTransform: "none", // This prevents uppercase text in buttons
+            textTransform: "none",
         },
     },
     palette: {
         mode: "light",
         primary: {
-            main: "#2196f3", // You can adjust this color
-            light: "#64b5f6",
-            dark: "#1976d2",
+            main: "#009EC5", // Start of the gradient
+            light: "#2e7eed", // Midpoint of the gradient
+            dark: "#02225B", // End of the gradient
         },
         secondary: {
-            main: "#f50057",
-            light: "#ff4081",
-            dark: "#c51162",
+            main: "#2e7eed", // Midpoint of the gradient
+        },
+        background: {
+            default: "#F4F6F8",
+            paper: "#FFFFFF",
         },
         text: {
             primary: "rgba(0, 0, 0, 0.87)",
@@ -71,7 +73,7 @@ const theme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 8, // Slightly rounded corners
+                    borderRadius: 8,
                     fontSize: "0.95rem",
                 },
             },
@@ -79,14 +81,14 @@ const theme = createTheme({
         MuiPaper: {
             styleOverrides: {
                 rounded: {
-                    borderRadius: 12, // Softer corners for cards and dialogs
+                    borderRadius: 12,
                 },
             },
         },
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.12)", // Softer shadow
+                    boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.12)",
                 },
             },
         },

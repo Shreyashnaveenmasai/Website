@@ -1,233 +1,171 @@
-import React, { useEffect, useState } from "react";
-
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Link as RouterLink } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import SearchIcon from "@mui/icons-material/Search";
-import Toolbar from "@mui/material/Toolbar";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { motion } from "framer-motion";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import Logo from "/assets/Svg.svg";
 
 const Navbar = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [isFixed, setIsFixed] = useState(true);
+    const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
+    const [activeTab, setActiveTab] = useState(location.pathname);
 
     useEffect(() => {
         const handleScroll = () => {
-            const footer = document.querySelector("footer");
-            if (footer) {
-                const footerTop = footer.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                setIsFixed(footerTop > windowHeight);
-            }
+            setScrolled(window.scrollY > 50);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const handleDrawerToggle = () => {
-        setDrawerOpen(!drawerOpen);
-    };
+    useEffect(() => {
+        setActiveTab(location.pathname);
+    }, [location.pathname]);
+
+    const handleDrawerToggle = useCallback(() => {
+        setDrawerOpen((prev) => !prev);
+    }, []);
 
     const menuItems = [
         { label: "Home", path: "/" },
         { label: "Services", path: "/services" },
         { label: "About", path: "/about" },
-        { label: "Blog", path: "/blog" },
         { label: "Contact", path: "/contact" },
     ];
 
-    const drawer = (
-        <Box
-            sx={{ width: 250 }}
-            role="presentation"
-            onClick={handleDrawerToggle}
-        >
-            <List>
-                {menuItems.map((item) => (
-                    <ListItem key={item.label} disablePadding>
-                        <ListItemButton component={RouterLink} to={item.path}>
-                            <ListItemText primary={item.label} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-        </Box>
-    );
-
     return (
         <AppBar
-            position={isFixed ? "fixed" : "absolute"}
-            elevation={0}
+            position="fixed"
+            elevation={scrolled ? 4 : 0}
+            component={motion.div}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             sx={{
-                backgroundColor: "background.paper",
-                borderBottom: 1,
-                borderColor: "grey.200",
-                transition: "all 0.3s ease-in-out",
-                top: isFixed ? 0 : "auto",
-                bottom: isFixed ? "auto" : 0,
+                backgroundColor: scrolled ? "rgba(15, 25, 50, 0.9)" : "transparent",
+                transition: "background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                backdropFilter: scrolled ? "blur(10px)" : "none",
+                borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "none",
+                padding: scrolled ? "8px 0" : "16px 0",
             }}
         >
-            <Container maxWidth="lg">
-                <Toolbar disableGutters sx={{ gap: 2 }}>
+            <Container maxWidth="xl">
+                <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
                     {/* Logo */}
-                    <Typography
-                        variant="h6"
-                        component={RouterLink}
-                        to="/"
-                        sx={{
-                            flexGrow: { xs: 1, md: 0 },
-                            color: "text.primary",
-                            fontWeight: 700,
-                            textDecoration: "none",
-                            mr: 4,
-                            fontSize: { xs: "1rem", sm: "1.25rem" },
-                        }}
-                    >
-                        MADS
-                    </Typography>
+                    <Box component={RouterLink} to="/" sx={{ textDecoration: "none" }}>
+                        <motion.img 
+                            src={Logo} 
+                            alt="Logo" 
+                            style={{ height: scrolled ? 60 : 80, transition: "height 0.3s ease-in-out" }} 
+                        />
+                    </Box>
 
                     {/* Desktop Navigation */}
                     {!isMobile && (
-                        <Box sx={{ display: "flex", gap: 3 }}>
+                        <Box sx={{ display: "flex", gap: 4 }}>
                             {menuItems.map((item) => (
-                                <Button
+                                <motion.div
                                     key={item.label}
-                                    component={RouterLink}
-                                    to={item.path}
-                                    sx={{
-                                        color: "text.primary",
-                                        "&:hover": {
-                                            color: "primary.main",
-                                            backgroundColor: "transparent",
-                                        },
-                                    }}
+                                    whileHover={{ scale: 1.1 }}
+                                    transition={{ duration: 0.2 }}
                                 >
-                                    {item.label}
-                                </Button>
+                                    <Button
+                                        component={RouterLink}
+                                        to={item.path}
+                                        sx={{
+                                            color: activeTab === item.path ? "#00d9ff" : "white",
+                                            fontWeight: activeTab === item.path ? "bold" : "normal",
+                                            position: "relative",
+                                            "&::after": {
+                                                content: '""',
+                                                display: "block",
+                                                width: activeTab === item.path ? "100%" : "0",
+                                                height: "2px",
+                                                backgroundColor: "#00d9ff",
+                                                transition: "width 0.3s ease-in-out",
+                                            },
+                                            "&:hover::after": {
+                                                width: "100%",
+                                            },
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Button>
+                                </motion.div>
                             ))}
                         </Box>
-                    )}
-
-                    {/* Search Bar */}
-                    {!isMobile && (
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                bgcolor: "grey.100",
-                                borderRadius: 2,
-                                px: 2,
-                                ml: 2,
-                            }}
-                        >
-                            <InputBase
-                                placeholder="Search..."
-                                sx={{ color: "text.primary" }}
-                            />
-                            <IconButton
-                                size="small"
-                                sx={{ color: "text.secondary" }}
-                            >
-                                <SearchIcon />
-                            </IconButton>
-                        </Box>
-                    )}
-
-                    {/* Social Media Icons */}
-                    {!isMobile && (
-                        <Box sx={{ display: "flex", gap: 2, ml: 2 }}>
-                            {[
-                                { icon: <FacebookIcon />, url: "#" },
-                                { icon: <TwitterIcon />, url: "#" },
-                                { icon: <LinkedInIcon />, url: "#" },
-                            ].map((social, index) => (
-                                <IconButton
-                                    key={index}
-                                    href={social.url}
-                                    size="small"
-                                    sx={{
-                                        color: "text.secondary",
-                                        "&:hover": { color: "primary.main" },
-                                    }}
-                                >
-                                    {social.icon}
-                                </IconButton>
-                            ))}
-                        </Box>
-                    )}
-
-                    {/* Get Started Button */}
-                    {!isMobile && (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            component={ScrollLink}
-                            to="get-started"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            sx={{
-                                ml: "auto",
-                                px: 4,
-                                py: 1,
-                                borderRadius: 2,
-                                textTransform: "none",
-                                fontSize: "0.95rem",
-                                fontWeight: 500,
-                                boxShadow: 2,
-                                "&:hover": {
-                                    boxShadow: 4,
-                                    transform: "translateY(-1px)",
-                                    transition: "all 0.2s ease-in-out",
-                                },
-                            }}
-                        >
-                            Get Started
-                        </Button>
                     )}
 
                     {/* Mobile Menu Button */}
                     {isMobile && (
-                        <IconButton
-                            edge="end"
-                            aria-label="menu"
-                            onClick={handleDrawerToggle}
-                            sx={{ color: "text.primary" }}
+                        <IconButton 
+                            onClick={handleDrawerToggle} 
+                            sx={{ color: "white" }} 
+                            aria-label="Open navigation menu"
                         >
                             <MenuIcon />
                         </IconButton>
                     )}
-
-                    {/* Mobile Drawer */}
-                    <Drawer
-                        anchor="right"
-                        open={drawerOpen}
-                        onClose={handleDrawerToggle}
-                    >
-                        {drawer}
-                    </Drawer>
                 </Toolbar>
             </Container>
+
+            {/* Mobile Drawer */}
+            <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerToggle}>
+                <Box
+                    sx={{
+                        width: 250,
+                        backgroundColor: "#0f1932",
+                        color: "white",
+                        height: "100%",
+                        paddingTop: 2,
+                    }}
+                    component={motion.div}
+                    initial={{ x: 250 }}
+                    animate={{ x: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                    <List>
+                        {menuItems.map((item) => (
+                            <ListItem key={item.label} disablePadding>
+                                <ListItemButton
+                                    component={RouterLink}
+                                    to={item.path}
+                                    selected={activeTab === item.path}
+                                    aria-selected={activeTab === item.path}
+                                    sx={{
+                                        color: "white",
+                                        "&.Mui-selected": {
+                                            backgroundColor: "#00d9ff",
+                                            color: "black",
+                                        },
+                                        "&:hover": {
+                                            backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                        },
+                                    }}
+                                    onClick={handleDrawerToggle}
+                                >
+                                    <ListItemText primary={item.label} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
+            </Drawer>
         </AppBar>
     );
 };

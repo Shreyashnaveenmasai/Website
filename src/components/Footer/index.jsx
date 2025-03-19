@@ -1,13 +1,16 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Typography from "@mui/material/Typography";
+
+const linkVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const iconVariants = {
+    hover: { scale: 1.2, transition: { duration: 0.3 } },
+};
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -16,112 +19,76 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                bgcolor: "grey.100",
-                color: "text.primary",
+                bgcolor: "grey.900",
+                color: "grey.100",
                 py: 6,
                 mt: 10,
             }}
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
         >
             <Container maxWidth="lg">
-                <Grid container spacing={8}>
+                <Grid container spacing={8} component={motion.div} initial="hidden" animate="visible">
                     {/* Company Info */}
-                    <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
                             TechSolutions
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Innovative IT solutions for businesses of all sizes.
+                        <Typography variant="body2" color="grey.300" sx={{ textAlign: { xs: "center", md: "left" } }}>
+                            IT staffing and digital transformation services tailored for businesses of all sizes.
                         </Typography>
                     </Grid>
 
                     {/* Quick Links */}
-                    <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
                             Quick Links
                         </Typography>
-                        <Box
-                            component="ul"
-                            sx={{
-                                listStyle: "none",
-                                p: 0,
-                                m: 0,
-                                "& li": { mb: 1 },
-                            }}
-                        >
-                            {[
-                                "Home",
-                                "Services",
-                                "About",
-                                "Blog",
-                                "Contact",
-                            ].map((item) => (
-                                <li key={item}>
-                                    <Link
-                                        component={RouterLink}
-                                        to={`/${item.toLowerCase()}`}
-                                        sx={{
-                                            color: "text.secondary",
-                                            textDecoration: "none",
-                                            "&:hover": {
-                                                color: "primary.main",
-                                            },
-                                        }}
-                                    >
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
-                        </Box>
+                        <nav>
+                            <Box
+                                component="ul"
+                                sx={{
+                                    listStyle: "none",
+                                    p: 0,
+                                    m: 0,
+                                    "& li": { mb: 1, textAlign: { xs: "center", md: "left" } },
+                                }}
+                            >
+                                {["Home", "Services", "About", "Contact"].map((item) => (
+                                    <motion.li key={item} whileHover={{ scale: 1.1 }}>
+                                        <Link
+                                            component={RouterLink}
+                                            to={`/${item.toLowerCase()}`}
+                                            sx={{
+                                                color: "grey.300",
+                                                textDecoration: "none",
+                                                "&:hover": { color: "primary.light" },
+                                                transition: "color 0.3s ease",
+                                            }}
+                                        >
+                                            {item}
+                                        </Link>
+                                    </motion.li>
+                                ))}
+                            </Box>
+                        </nav>
                     </Grid>
 
-                    {/* Contact Info */}
-                    <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    {/* Contact Info & Social Links */}
+                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
                             Contact Us
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            paragraph
-                        >
-                            Email: support@techsolutions.com
+                        <Typography variant="body2" color="grey.300" paragraph sx={{ textAlign: { xs: "center", md: "left" } }}>
+                            Email: support@madsgroup.com
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            paragraph
-                        >
-                            Phone: +1 (123) 456-7890
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            paragraph
-                        >
-                            Address: 123 Tech Street, New York, NY
+                        <Typography variant="body2" color="grey.300" paragraph sx={{ textAlign: { xs: "center", md: "left" } }}>
+                            Address: 16220 N Scottsdale Road, Scottsdale, Arizona 85254-USA
                         </Typography>
 
-                        {/* Social Icons */}
-                        <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
-                            {[
-                                { icon: <FacebookIcon />, url: "#" },
-                                { icon: <TwitterIcon />, url: "#" },
-                                { icon: <LinkedInIcon />, url: "#" },
-                            ].map((social, index) => (
-                                <Link
-                                    key={index}
-                                    href={social.url}
-                                    color="text.secondary"
-                                    sx={{
-                                        "&:hover": {
-                                            color: "primary.main",
-                                        },
-                                    }}
-                                >
-                                    {social.icon}
-                                </Link>
-                            ))}
-                        </Box>
+                        
                     </Grid>
                 </Grid>
 
@@ -129,14 +96,19 @@ const Footer = () => {
                 <Box
                     sx={{
                         mt: 6,
-                        pt: 2,
+                        pt: 3,
+                        pb: 3,
                         borderTop: 1,
-                        borderColor: "grey.200",
+                        borderColor: "grey.700",
                         textAlign: "center",
                     }}
+                    component={motion.div}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5 }}
                 >
-                    <Typography variant="body2" color="text.secondary">
-                        © {currentYear} TechSolutions. All rights reserved.
+                    <Typography variant="body2" color="grey.400">
+                        © {currentYear} MadsGroupSolutions. All rights reserved.
                     </Typography>
                 </Box>
             </Container>
