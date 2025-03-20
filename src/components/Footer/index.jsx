@@ -48,7 +48,7 @@ const Footer = () => {
                             gutterBottom
                             sx={{ textAlign: { xs: "center", md: "left" } }}
                         >
-                            TechSolutions
+                            MADS CONSULTING GROUP LLC
                         </Typography>
                         <Typography
                             variant="body2"
