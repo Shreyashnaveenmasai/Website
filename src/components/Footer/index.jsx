@@ -1,7 +1,8 @@
 import { Box, Container, Grid, Link, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const linkVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -17,6 +18,7 @@ const Footer = () => {
 
     return (
         <Box
+            id="footer"
             component="footer"
             sx={{
                 bgcolor: "grey.900",
@@ -30,20 +32,53 @@ const Footer = () => {
             transition={{ duration: 1 }}
         >
             <Container maxWidth="lg">
-                <Grid container spacing={8} component={motion.div} initial="hidden" animate="visible">
+                <Grid
+                    container
+                    spacing={8}
+                    component={motion.div}
+                    initial="hidden"
+                    animate="visible"
+                >
                     {/* Company Info */}
-                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
+                    <Grid
+                        item
+                        xs={12}
+                        md={4}
+                        component={motion.div}
+                        variants={linkVariants}
+                    >
+                        <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            gutterBottom
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
                             TechSolutions
                         </Typography>
-                        <Typography variant="body2" color="grey.300" sx={{ textAlign: { xs: "center", md: "left" } }}>
-                            IT staffing and digital transformation services tailored for businesses of all sizes.
+                        <Typography
+                            variant="body2"
+                            color="grey.300"
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
+                            IT staffing and digital transformation services
+                            tailored for businesses of all sizes.
                         </Typography>
                     </Grid>
 
                     {/* Quick Links */}
-                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
+                    <Grid
+                        item
+                        xs={12}
+                        md={4}
+                        component={motion.div}
+                        variants={linkVariants}
+                    >
+                        <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            gutterBottom
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
                             Quick Links
                         </Typography>
                         <nav>
@@ -53,42 +88,73 @@ const Footer = () => {
                                     listStyle: "none",
                                     p: 0,
                                     m: 0,
-                                    "& li": { mb: 1, textAlign: { xs: "center", md: "left" } },
+                                    "& li": {
+                                        mb: 1,
+                                        textAlign: { xs: "center", md: "left" },
+                                    },
                                 }}
                             >
-                                {["Home", "Services", "About", "Contact"].map((item) => (
-                                    <motion.li key={item} whileHover={{ scale: 1.1 }}>
-                                        <Link
-                                            component={RouterLink}
-                                            to={`/${item.toLowerCase()}`}
-                                            sx={{
-                                                color: "grey.300",
-                                                textDecoration: "none",
-                                                "&:hover": { color: "primary.light" },
-                                                transition: "color 0.3s ease",
-                                            }}
+                                {["Home", "Services", "About", "Contact"].map(
+                                    (item) => (
+                                        <motion.li
+                                            key={item}
+                                            whileHover={{ scale: 1.1 }}
                                         >
-                                            {item}
-                                        </Link>
-                                    </motion.li>
-                                ))}
+                                            <Link
+                                                component={RouterLink}
+                                                to={`/${item.toLowerCase()}`}
+                                                sx={{
+                                                    color: "grey.300",
+                                                    textDecoration: "none",
+                                                    "&:hover": {
+                                                        color: "primary.light",
+                                                    },
+                                                    transition:
+                                                        "color 0.3s ease",
+                                                }}
+                                            >
+                                                {item}
+                                            </Link>
+                                        </motion.li>
+                                    )
+                                )}
                             </Box>
                         </nav>
                     </Grid>
 
                     {/* Contact Info & Social Links */}
-                    <Grid item xs={12} md={4} component={motion.div} variants={linkVariants}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ textAlign: { xs: "center", md: "left" } }}>
+                    <Grid
+                        item
+                        xs={12}
+                        md={4}
+                        component={motion.div}
+                        variants={linkVariants}
+                    >
+                        <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            gutterBottom
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
                             Contact Us
                         </Typography>
-                        <Typography variant="body2" color="grey.300" paragraph sx={{ textAlign: { xs: "center", md: "left" } }}>
+                        <Typography
+                            variant="body2"
+                            color="grey.300"
+                            paragraph
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
                             Email: support@madsgroup.com
                         </Typography>
-                        <Typography variant="body2" color="grey.300" paragraph sx={{ textAlign: { xs: "center", md: "left" } }}>
-                            Address: 16220 N Scottsdale Road, Scottsdale, Arizona 85254-USA
+                        <Typography
+                            variant="body2"
+                            color="grey.300"
+                            paragraph
+                            sx={{ textAlign: { xs: "center", md: "left" } }}
+                        >
+                            Address: 16220 N Scottsdale Road, Scottsdale,
+                            Arizona 85254-USA
                         </Typography>
-
-                        
                     </Grid>
                 </Grid>
 

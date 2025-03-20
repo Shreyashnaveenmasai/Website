@@ -1,9 +1,9 @@
 import * as React from "react";
 
+import AppRoutes from "./routes";
 import Box from "@mui/material/Box";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import AppRoutes from "./routes";
 
 function App() {
     return (
@@ -11,13 +11,13 @@ function App() {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                pt: "64px",
+                // pt: "64px",
                 pl: "0px",
                 pr: "0px",
             }}
         >
             <Navbar />
-            <Box sx={{ mt: 1, flex: 1, width: "100%" }}>
+            <Box sx={{ flex: 1, width: "100%" }}>
                 <AppRoutes />
             </Box>
             <Footer />

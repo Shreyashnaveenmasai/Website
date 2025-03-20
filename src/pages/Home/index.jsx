@@ -12,6 +12,7 @@ import {
 import { coreServices, testimonials } from "./constants";
 
 import Button from "@mui/material/Button";
+import HeroSection from "/assets/HeroSectionImage.jpeg";
 import Image from "/assets/HeroSection.png";
 import Rating from "@mui/material/Rating";
 import React from "react";
@@ -23,12 +24,18 @@ const Home = () => {
         <>
             {/* Hero Section */}
             <Box
+                id="heroSection"
                 sx={{
                     position: "relative",
-                    color: "white",
+                    color: "black",
                     py: { xs: 8, md: 12 },
+                    minHeight: "100vh",
                     textAlign: "center",
                     overflow: "hidden",
+                    backgroundImage: `url(${HeroSection})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backdropFilter: "blur(8px)", // Blur effect
                     "::before": {
                         content: '""',
                         position: "absolute",
@@ -38,7 +45,17 @@ const Home = () => {
                         height: "100%",
                         background:
                             "linear-gradient(45deg, rgba(0, 158, 197, 0.3) 0%, rgba(46, 126, 237, 0.3) 50%, rgba(2, 34, 91, 0.3) 100%)",
-                        opacity: 0.9,
+                        opacity: 0.8,
+                        zIndex: 0,
+                    },
+                    "::after": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay for opacity effect
                         zIndex: 0,
                     },
                 }}
@@ -66,7 +83,7 @@ const Home = () => {
                             gutterBottom
                             sx={{
                                 color: "#ffffff",
-                                textShadow: "2px 2px 4px rgba(0,0,0,0.2)",
+                                textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
                             }}
                         >
                             MADS Consulting Services LLC
@@ -76,7 +93,7 @@ const Home = () => {
                             sx={{
                                 mt: 2,
                                 color: "#ffffff",
-                                textShadow: "1px 1px 3px rgba(0,0,0,0.2)",
+                                textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
                             }}
                         >
                             Adapting Technology to Fit Your Business
@@ -87,7 +104,7 @@ const Home = () => {
                                 mt: 2,
                                 mb: 4,
                                 color: "#ffffff",
-                                textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
+                                textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
                             }}
                         >
                             Innovative IT Solutions for Business Growth
@@ -114,8 +131,10 @@ const Home = () => {
                             Get Started
                         </Button>
                     </Box>
-                    <Container
+                    <Box
+                        alignItems="right"
                         sx={{
+                            marginRight: "-40px",
                             width: { xs: "100%", md: "45%" },
                             overflow: "hidden",
                             mt: { xs: 4, md: 0 },
@@ -126,9 +145,117 @@ const Home = () => {
                             alt="Hero Section Image"
                             style={{ width: "100%", height: "auto" }}
                         />
-                    </Container>
+                    </Box>
                 </Container>
             </Box>
+
+            {/* <Box
+                sx={{
+                    position: "relative",
+                    color: "black",
+                    py: { xs: 8, md: 12 },
+                    textAlign: "center",
+                    overflow: "hidden",
+                    backgroundImage: `url(${HeroSection})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    "::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background:
+                            "linear-gradient(45deg, rgba(0, 158, 197, 0.4) 0%, rgba(46, 126, 237, 0.4) 50%, rgba(2, 34, 91, 0.5) 100%)",
+                        opacity: 0.9,
+                        zIndex: 0,
+                    },
+                    "::after": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backdropFilter: "blur(8px)", // Blur effect
+                        zIndex: 0,
+                    },
+                }}
+            >
+                <Container
+                    sx={{
+                        display: "flex",
+                        flexDirection: { xs: "column", md: "row" },
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        position: "relative",
+                        zIndex: 1,
+                    }}
+                    maxWidth="lg"
+                >
+                    <Box
+                        sx={{
+                            textAlign: "left",
+                            width: { xs: "100%", md: "55%" },
+                        }}
+                    >
+                        <Typography
+                            variant="h2"
+                            fontWeight={700}
+                            gutterBottom
+                            sx={{
+                                color: "#ffffff",
+                                textShadow: "3px 3px 6px rgba(0,0,0,0.7)",
+                            }}
+                        >
+                            MADS Consulting Services LLC
+                        </Typography>
+                        <Typography
+                            variant="h4"
+                            sx={{
+                                mt: 2,
+                                color: "#ffffff",
+                                textShadow: "2px 2px 5px rgba(0,0,0,0.6)",
+                            }}
+                        >
+                            Adapting Technology to Fit Your Business
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                mt: 2,
+                                mb: 4,
+                                color: "#ffffff",
+                                textShadow: "2px 2px 4px rgba(0,0,0,0.6)",
+                            }}
+                        >
+                            Innovative IT Solutions for Business Growth
+                        </Typography>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            component={ScrollLink}
+                            to="contact"
+                            smooth={true}
+                            sx={{
+                                bgcolor: "#00d9ff",
+                                color: "#02225B",
+                                px: 4,
+                                py: 1.5,
+                                fontSize: "1.1rem",
+                                fontWeight: 600,
+                                "&:hover": {
+                                    bgcolor: "#009EC5",
+                                    color: "white",
+                                },
+                            }}
+                        >
+                            Get Started
+                        </Button>
+                    </Box>
+                </Container>
+            </Box> */}
 
             {/* Core Services Section */}
             <Container sx={{ py: 8 }} id="services">
@@ -389,114 +516,6 @@ const Home = () => {
                     </Grid>
                 </Container>
             </Box>
-
-            {/* Industries We Serve Section */}
-            {/* <Box
-                sx={{
-                    py: 8,
-                    bgcolor: "rgba(0, 158, 197, 0.03)", // Very light theme color background
-                }}
-            >
-                <Container maxWidth="lg">
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        textAlign="center"
-                        fontWeight={700}
-                        gutterBottom
-                        sx={{
-                            fontSize: { xs: "2.5rem", md: "3.5rem" },
-                            background:
-                                "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            mb: 6,
-                        }}
-                    >
-                        Industries We Serve
-                    </Typography>
-                    <Grid container spacing={4} sx={{ mt: 4 }}>
-                        {[
-                            {
-                                title: "Government & Public Sector",
-                                description:
-                                    "Secure IT infrastructure for state and federal agencies.",
-                            },
-                            {
-                                title: "Healthcare",
-                                description:
-                                    "HIPAA-compliant solutions for patient data management.",
-                            },
-                            {
-                                title: "Manufacturing",
-                                description:
-                                    "ERP and IoT-driven automation for smart factories.",
-                            },
-                            {
-                                title: "Financial Services",
-                                description:
-                                    "AI-powered fraud detection and digital banking solutions.",
-                            },
-                            {
-                                title: "Retail & E-commerce",
-                                description:
-                                    "Cloud-based inventory and omnichannel retail solutions.",
-                            },
-                        ].map((industry, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Card
-                                    elevation={0}
-                                    sx={{
-                                        height: "100%",
-                                        p: 3,
-                                        background: "rgba(255, 255, 255, 0.7)",
-                                        border: "1px solid rgba(46, 126, 237, 0.1)",
-                                        transition: "all 0.3s ease-in-out",
-                                        "&:hover": {
-                                            transform: "translateY(-4px)",
-                                            background:
-                                                "rgba(255, 255, 255, 0.9)",
-                                            borderColor:
-                                                "rgba(46, 126, 237, 0.2)",
-                                            boxShadow:
-                                                "0 4px 20px rgba(46, 126, 237, 0.1)",
-                                        },
-                                    }}
-                                >
-                                    <CardContent>
-                                        <Typography
-                                            variant="h5"
-                                            component="h3"
-                                            fontWeight={600}
-                                            gutterBottom
-                                            sx={{
-                                                background:
-                                                    "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                                                WebkitBackgroundClip: "text",
-                                                WebkitTextFillColor:
-                                                    "transparent",
-                                                mb: 2,
-                                            }}
-                                        >
-                                            {industry.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            sx={{
-                                                color: "#02225B",
-                                                opacity: 0.75,
-                                                lineHeight: 1.8,
-                                            }}
-                                        >
-                                            {industry.description}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </Box> */}
 
             {/* Testimonials Section */}
             <Box sx={{ bgcolor: "rgba(0, 158, 197, 0.03)", py: 8 }}>

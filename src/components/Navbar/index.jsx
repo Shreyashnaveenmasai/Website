@@ -6,19 +6,14 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Logo from "/assets/Svg.svg";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import Toolbar from "@mui/material/Toolbar";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -27,18 +22,31 @@ const Navbar = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [isFixed, setIsFixed] = useState(true);
+    const [position, setPosition] = useState("absolute");
     const location = useLocation();
     const [activeTab, setActiveTab] = useState(location.pathname);
 
     useEffect(() => {
         const handleScroll = () => {
-            const footer = document.querySelector("footer");
+            const scrollY = window.scrollY;
+            const footer = document.querySelector("#footer");
+
+            let newPosition = "absolute"; // Default when scroll is < 100vh
+
+            if (scrollY > window.innerHeight) {
+                newPosition = "fixed"; // Fix navbar when scrolling beyond 100vh
+            }
+
             if (footer) {
                 const footerTop = footer.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                setIsFixed(footerTop > windowHeight);
+
+                console.log("footerTop", footerTop);
+                if (footerTop < window.innerHeight) {
+                    newPosition = "absolute"; // Back to absolute when footer is in view
+                }
             }
+
+            setPosition(newPosition);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -51,9 +59,8 @@ const Navbar = () => {
 
     const menuItems = [
         { label: "Home", path: "/" },
-        { label: "Services", path: "/services" },
         { label: "About", path: "/about" },
-        { label: "Blog", path: "/blog" },
+        { label: "Services", path: "/services" },
         { label: "Contact", path: "/contact" },
     ];
 
@@ -82,20 +89,21 @@ const Navbar = () => {
 
     return (
         <AppBar
-            position={isFixed ? "fixed" : "absolute"}
-            elevation={0}
+            position={position}
             sx={{
-                backgroundColor: theme.palette.background.paper,
-                borderBottom: 1,
-                borderColor: "grey.200",
-                transition: "all 0.3s ease-in-out",
-                top: isFixed ? 0 : "auto",
-                bottom: isFixed ? "auto" : 0,
+                backgroundColor:
+                    position === "fixed"
+                        ? theme.palette.background.default
+                        : "transparent",
+                // borderBottom: position === "fixed" ? 1 : "none",
+                // borderColor: position === "fixed" ? "grey.200" : "none",
+                transition: "all 0.4s ease-in-out",
+                boxShadow: position === "fixed" ? "" : "none",
             }}
         >
             <Container maxWidth="lg">
                 <Toolbar
-                    // disableGutters
+                    disableGutters
                     sx={{
                         paddingY: 1,
                         display: "flex",
@@ -114,7 +122,11 @@ const Navbar = () => {
                             mr: 4,
                         }}
                     >
-                        <img src={Logo} alt="Logo" style={{ height: 60 }} />
+                        <img
+                            src={Logo}
+                            alt="Logo"
+                            style={{ height: 60, marginLeft: "-10px" }}
+                        />
                     </Box>
 
                     {/* Desktop Navigation */}
@@ -126,12 +138,15 @@ const Navbar = () => {
                                     component={RouterLink}
                                     to={item.path}
                                     sx={{
+                                        fontSize: "1.2rem",
                                         color:
                                             activeTab === item.path
                                                 ? theme.palette.primary.main
-                                                : theme.palette.text.primary,
+                                                : position === "fixed"
+                                                ? theme.palette.text.primary
+                                                : theme.palette.text.secondary,
                                         "&:hover": {
-                                            color: theme.palette.primary.main,
+                                            color: theme.palette.primary.light,
                                             backgroundColor: "transparent",
                                         },
                                     }}

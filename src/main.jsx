@@ -1,11 +1,29 @@
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
 
 const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#009EC5", // Main theme color
+            light: "#2e7eed", // Lighter shade for hover effects
+            dark: "#02225B", // Darker shade for text
+        },
+        secondary: {
+            main: "#2e7eed", // Secondary color
+        },
+        background: {
+            default: "#F4F6F8", // Light background color
+            paper: "#FFFFFF", // Background for paper components
+        },
+        text: {
+            primary: "rgba(0, 0, 0, 0.87)", // Primary text color
+            secondary: "rgba(0, 0, 0, 0.6)", // Secondary text color
+        },
+    },
     typography: {
         fontFamily: [
             "Inter",
@@ -22,51 +40,40 @@ const theme = createTheme({
         ].join(","),
         h1: {
             fontWeight: 600,
+            color: "#02225B",
         },
         h2: {
             fontWeight: 600,
+            color: "#02225B",
         },
         h3: {
             fontWeight: 600,
+            color: "#02225B",
         },
         h4: {
             fontWeight: 500,
+            color: "#02225B",
         },
         h5: {
             fontWeight: 500,
+            color: "#02225B",
         },
         h6: {
             fontWeight: 500,
+            color: "#02225B",
         },
         subtitle1: {
             fontWeight: 400,
+            color: "#02225B",
         },
         body1: {
             fontWeight: 400,
             lineHeight: 1.5,
+            color: "#02225B",
         },
         button: {
             fontWeight: 500,
             textTransform: "none",
-        },
-    },
-    palette: {
-        mode: "light",
-        primary: {
-            main: "#009EC5", // Start of the gradient
-            light: "#2e7eed", // Midpoint of the gradient
-            dark: "#02225B", // End of the gradient
-        },
-        secondary: {
-            main: "#2e7eed", // Midpoint of the gradient
-        },
-        background: {
-            default: "#F4F6F8",
-            paper: "#FFFFFF",
-        },
-        text: {
-            primary: "rgba(0, 0, 0, 0.87)",
-            secondary: "rgba(0, 0, 0, 0.6)",
         },
     },
     components: {
@@ -94,7 +101,6 @@ const theme = createTheme({
         },
     },
 });
-
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
