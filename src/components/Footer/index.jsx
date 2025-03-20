@@ -9,10 +9,6 @@ const linkVariants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const iconVariants = {
-    hover: { scale: 1.2, transition: { duration: 0.3 } },
-};
-
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
@@ -26,7 +22,6 @@ const Footer = () => {
                 py: 6,
                 mt: 10,
             }}
-            component={motion.div}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}

@@ -144,7 +144,7 @@ const Navbar = () => {
                                                 ? theme.palette.primary.main
                                                 : position === "fixed"
                                                 ? theme.palette.text.primary
-                                                : theme.palette.text.secondary,
+                                                : "#fff",
                                         "&:hover": {
                                             color: theme.palette.primary.light,
                                             backgroundColor: "transparent",
