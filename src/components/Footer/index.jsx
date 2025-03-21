@@ -151,7 +151,7 @@ const Footer = () => {
                 <Divider sx={{ my: 4, borderColor: "rgba(255, 255, 255, 0.1)" }} />
                 <Box sx={{ textAlign: "center" }}>
                     <Typography variant="body2" sx={{ opacity: 0.7 }}>
-                        © {currentYear} MadsGroupSolutions. All rights reserved.
+                        © {currentYear} MadsConsultingGroup. All rights reserved.
                     </Typography>
                 </Box>
             </Container>

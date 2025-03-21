@@ -11,14 +11,13 @@ import {
 } from "@mui/material";
 import { coreServices, testimonials } from "./constants";
 
+import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
-import HeroSection from "/assets/HeroSectionImage.jpeg";
-import Image from "/assets/HeroSection.png";
 import Rating from "@mui/material/Rating";
 import React from "react";
 import { Link as ScrollLink } from "react-scroll";
-import StarIcon from "@mui/icons-material/Star";
-import { motion } from "framer-motion";
+import Image from "/assets/HeroSection.png";
+import HeroSection from "/assets/HeroSectionImage.jpeg";
 
 const Home = () => {
     return (
@@ -324,7 +323,7 @@ const Home = () => {
                             mb: 6,
                         }}
                     >
-                        Why Choose MADS Consulting?
+                        Why Choose MADS?
                     </Typography>
                     <Grid
                         container
@@ -596,7 +595,7 @@ const Home = () => {
                             mb: 6,
                         }}
                     >
-                        Get Started with MADS Consulting
+                        Get Started with MADS 
                     </Typography>
                     <Grid
                         container
