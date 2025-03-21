@@ -9,7 +9,7 @@ export const coreServices = [
             "Application Modernization",
             "Cybersecurity Consulting",
         ],
-        image: "/assets/app-screen-1.png",
+        image: "/assets/HomeSoftware.jpg",
     },
     {
         title: "Cloud-Based Solutions",
@@ -20,7 +20,7 @@ export const coreServices = [
             "Hybrid & Multi-Cloud Solutions",
             "Cloud Security & Compliance",
         ],
-        image: "/assets/app-screen-1.png",
+        image: "/assets/HomeCloud.jpg",
     },
     {
         title: "ERP Implementation Consulting",
@@ -31,7 +31,7 @@ export const coreServices = [
             "ERP Selection & Implementation",
             "Financial & HR Automation",
         ],
-        image: "/assets/app-screen-1.png",
+        image: "/assets/HomeERP.jpg",
     },
     {
         title: "Project Management Services",
@@ -42,7 +42,7 @@ export const coreServices = [
             "Agile, Scrum & Waterfall Methodologies",
             "Budgeting, Cost Control & Risk Mitigation",
         ],
-        image: "/assets/app-screen-1.png",
+        image: "/assets/HomeProject.jpg",
     },
 ];
 

@@ -1,8 +1,8 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 
-import { Link } from "react-router-dom";
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const About = () => {
     return (
@@ -19,7 +19,7 @@ const About = () => {
             >
                 {/* Left Side - Image */}
                 <motion.img
-                    src="/assets/HeroSectionImage.jpeg"
+                    src="/assets/AboutUs.jpg"
                     alt="About Us"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -140,11 +140,11 @@ const About = () => {
                     justifyContent="center"
                     sx={{ mt: 4 }}
                 >
-                    {[1, 2].map((num) => (
+                    {["/assets/AboutUs1.jpg", "/assets/AboutUs2.jpg"].map((src,index) => (
                         <motion.img
-                            key={num}
-                            src={`/assets/HeroSectionImage.jpeg`}
-                            alt={`Small Apps ${num}`}
+                            key={index}
+                            src={src}
+                            alt={`Small Apps ${index+1}`}
                             initial={{ scale: 0.9, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.8 }}

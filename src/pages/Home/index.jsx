@@ -11,13 +11,13 @@ import {
 } from "@mui/material";
 import { coreServices, testimonials } from "./constants";
 
+import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
-import HeroSection from "/assets/HeroSectionImage.jpeg";
-import Image from "/assets/HeroSection.png";
 import Rating from "@mui/material/Rating";
 import React from "react";
 import { Link as ScrollLink } from "react-scroll";
-import StarIcon from "@mui/icons-material/Star";
+import Image from "/assets/HeroSection.png";
+import HeroSection from "/assets/HeroSectionImage.jpeg";
 
 const Home = () => {
     return (
@@ -35,8 +35,17 @@ const Home = () => {
                     backgroundImage: `url(${HeroSection})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    backdropFilter: "blur(8px)", // Blur effect
                     "::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backdropFilter: "blur(8px)", // Moved blur here for better effect
+                        zIndex: -1,
+                    },
+                    "::after": {
                         content: '""',
                         position: "absolute",
                         top: 0,
@@ -46,19 +55,21 @@ const Home = () => {
                         background:
                             "linear-gradient(45deg, rgba(0, 158, 197, 0.3) 0%, rgba(46, 126, 237, 0.3) 50%, rgba(2, 34, 91, 0.3) 100%)",
                         opacity: 0.8,
-                        zIndex: 0,
+                        zIndex: -1,
                     },
-                    "::after": {
+                    "&::after": {
                         content: '""',
                         position: "absolute",
                         top: 0,
                         left: 0,
                         width: "100%",
                         height: "100%",
-                        backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay for opacity effect
-                        zIndex: 0,
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        zIndex: -1,
                     },
-                }}
+                    willChange: "transform, opacity",
+                }} 
+                
             >
                 <Container
                     sx={{
@@ -86,7 +97,7 @@ const Home = () => {
                                 textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
                             }}
                         >
-                            MADS Consulting Services LLC
+                            MADS CONSULTING GROUP LLC
                         </Typography>
                         <Typography
                             variant="h4"
@@ -150,264 +161,269 @@ const Home = () => {
             </Box>
 
             {/* Core Services Section */}
-            <Container sx={{ py: 8 }} id="services">
-                <Container>
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        textAlign="center"
-                        fontWeight={700}
-                        gutterBottom
+            {/* Core Services Section */}
+<Container sx={{ py: 8 }} id="services">
+    <Typography
+        variant="h3"
+        component="h2"
+        textAlign="center"
+        fontWeight={700}
+        gutterBottom
+        sx={{
+            fontSize: { xs: "2.5rem", md: "3.5rem" },
+            background: "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            mb: 6,
+        }}
+    >
+        Our Core Services
+    </Typography>
+
+    <Grid container spacing={6} sx={{ mt: 4 }}>
+        {coreServices.map((service, index) => (
+            <Grid
+                container
+                item
+                xs={12}
+                spacing={4}
+                key={index}
+                direction={index % 2 === 0 ? "row" : "row-reverse"}
+                alignItems="center"
+            >
+                {/* Image Section */}
+                <Grid item xs={12} md={6}>
+                    <Box
                         sx={{
-                            fontSize: { xs: "2.5rem", md: "3.5rem" },
-                            background:
-                                "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            mb: 6,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "100%", // Matches text height
                         }}
                     >
-                        Our Core Services
-                    </Typography>
-                    <Grid container spacing={6} sx={{ mt: 4 }}>
-                        {coreServices.map((service, index) => (
-                            <Grid
-                                container
-                                item
-                                xs={12}
-                                spacing={4}
-                                key={index}
-                                direction={
-                                    index % 2 === 0 ? "row" : "row-reverse"
-                                }
-                                alignItems="center"
-                            >
-                                {/* Image Section */}
-                                <Grid item xs={12} md={6}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            // width: "100%",
-                                        }}
-                                    >
-                                        <img
-                                            src={service.image}
-                                            alt={service.title}
-                                            style={{
-                                                maxWidth: "100%",
-                                                width: "40%",
-                                                height: "auto",
-                                            }}
-                                        />
-                                    </Box>
-                                </Grid>
+                        <img
+                            src={service.image}
+                            alt={service.title}
+                            style={{
+                                maxWidth: "100%",
+                                width: "clamp(50%, 80%, 100%)", // Dynamic size based on text
+                                height: "auto",
+                                maxHeight: "80%", // Avoids oversized images
+                                objectFit: "contain",
+                            }}
+                        />
+                    </Box>
+                </Grid>
 
-                                {/* Text Section */}
-                                <Grid item xs={12} md={6}>
-                                    <Box>
-                                        <Typography
-                                            variant="h4"
-                                            component="h3"
-                                            fontWeight={700}
-                                            gutterBottom
-                                            sx={{
-                                                background:
-                                                    "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                                                WebkitBackgroundClip: "text",
-                                                WebkitTextFillColor:
-                                                    "transparent",
-                                                mb: 2,
-                                                fontSize: {
-                                                    xs: "1.8rem",
-                                                    md: "2.2rem",
-                                                },
-                                                letterSpacing: "-0.5px",
-                                            }}
-                                        >
-                                            {service.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            sx={{
+                {/* Text Section */}
+                <Grid item xs={12} md={6}>
+                    <Box>
+                        <Typography
+                            variant="h4"
+                            component="h3"
+                            fontWeight={700}
+                            gutterBottom
+                            sx={{
+                                background: "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                mb: 2,
+                                fontSize: { xs: "1.8rem", md: "2.2rem" },
+                                letterSpacing: "-0.5px",
+                            }}
+                        >
+                            {service.title}
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                color: "#02225B",
+                                opacity: 0.85,
+                                mb: 3,
+                                lineHeight: 1.8,
+                            }}
+                            paragraph
+                        >
+                            {service.description}
+                        </Typography>
+                        <List>
+                            {service.items.map((item, idx) => (
+                                <ListItem
+                                    key={idx}
+                                    sx={{
+                                        pl: 0,
+                                        pb: 0,
+                                        "&::before": {
+                                            content: '""',
+                                            width: "6px",
+                                            height: "6px",
+                                            borderRadius: "50%",
+                                            backgroundColor: "#2e7eed",
+                                            display: "inline-block",
+                                            marginRight: "12px",
+                                        },
+                                    }}
+                                >
+                                    <ListItemText
+                                        primary={item}
+                                        sx={{
+                                            "& .MuiTypography-root": {
                                                 color: "#02225B",
-                                                opacity: 0.8,
-                                                mb: 3,
-                                                lineHeight: 1.8,
-                                            }}
-                                            paragraph
-                                        >
-                                            {service.description}
-                                        </Typography>
-                                        <List>
-                                            {service.items.map((item, idx) => (
-                                                <ListItem
-                                                    key={idx}
-                                                    sx={{
-                                                        pl: 0,
-                                                        pb: 0,
-                                                        "&::before": {
-                                                            content: '""',
-                                                            width: "6px",
-                                                            height: "6px",
-                                                            borderRadius: "50%",
-                                                            backgroundColor:
-                                                                "#2e7eed",
-                                                            display:
-                                                                "inline-block",
-                                                            marginRight: "12px",
-                                                        },
-                                                    }}
-                                                >
-                                                    <ListItemText
-                                                        primary={item}
-                                                        sx={{
-                                                            "& .MuiTypography-root":
-                                                                {
-                                                                    color: "#02225B",
-                                                                    opacity: 0.75,
-                                                                    fontWeight: 500,
-                                                                },
-                                                        }}
-                                                    />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </Container>
+                                                opacity: 0.85,
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Box>
+                </Grid>
+            </Grid>
+        ))}
+    </Grid>
+</Container>
+
 
             {/* Why Choose mads */}
             <Box
-                sx={{
-                    py: 8,
-                    bgcolor: "rgba(0, 158, 197, 0.03)", // Very light theme color background
-                }}
-            >
-                <Container maxWidth="lg">
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        textAlign="center"
-                        fontWeight={700}
-                        gutterBottom
-                        sx={{
-                            fontSize: { xs: "2.5rem", md: "3.5rem" },
-                            background:
-                                "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            mb: 6,
+    sx={{
+        py: 8,
+        bgcolor: "rgba(0, 158, 197, 0.03)", // Light background
+    }}
+>
+    <Container maxWidth="lg">
+        <Typography
+            variant="h3"
+            component="h2"
+            textAlign="center"
+            fontWeight={700}
+            gutterBottom
+            sx={{
+                fontSize: { xs: "2.5rem", md: "3.5rem" },
+                background: "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                mb: 6,
+            }}
+        >
+            Why Choose MADS Consulting?
+        </Typography>
+        <Grid container spacing={4} sx={{ mt: 4, alignItems: "stretch" }}>
+            {/* Left Image Section */}
+            <Grid item xs={12} md={6}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 2,
+                        height: "100%", // Match the height of right-side content
+                    }}
+                >
+                    <img
+                        src="/assets/WhyChooseUs.jpg"
+                        alt="Why Choose Us"
+                        style={{
+                            width: "100%",
+                            height: "50%", // Adjusts dynamically
+                            objectFit: "cover",
+                            borderRadius: "8px",
                         }}
-                    >
-                        Why Choose MADS Consulting?
-                    </Typography>
-                    <Grid container spacing={4} sx={{ mt: 4 }}>
-                        <Grid item xs={12} md={6}>
-                            <Box
+                    />
+                    <img
+                        src="/assets/WhyChooseUs2.jpg" // Add your second image
+                        alt="Our Strengths"
+                        style={{
+                            width: "100%",
+                            height: "50%", // Adjusts dynamically
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                        }}
+                    />
+                </Box>
+            </Grid>
+
+            {/* Right Text Content */}
+            <Grid item xs={12} md={6}>
+                <Grid container spacing={4}>
+                    {[
+                        {
+                            title: "Industry-Leading Expertise",
+                            description:
+                                "A team of experienced professionals with deep technical knowledge.",
+                        },
+                        {
+                            title: "Hands-On Innovation",
+                            description:
+                                "We develop our own in-house software solutions to stay ahead of trends.",
+                        },
+                        {
+                            title: "End-to-End IT Support",
+                            description:
+                                "From consultation to deployment, we manage the entire tech lifecycle.",
+                        },
+                        {
+                            title: "Scalable & Cost-Effective Solutions",
+                            description:
+                                "IT solutions tailored for startups, SMEs, and large enterprises.",
+                        },
+                    ].map((item, index) => (
+                        <Grid item xs={12} key={index}>
+                            <Card
+                                elevation={0}
                                 sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
+                                    height: "100%",
+                                    p: 3,
+                                    background: "rgba(255, 255, 255, 0.8)",
+                                    border: "1px solid rgba(46, 126, 237, 0.15)",
+                                    borderRadius: "12px",
+                                    transition: "all 0.3s ease-in-out",
+                                    "&:hover": {
+                                        transform: "translateY(-4px)",
+                                        background: "rgba(255, 255, 255, 1)",
+                                        borderColor: "rgba(46, 126, 237, 0.3)",
+                                        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
+                                    },
                                 }}
                             >
-                                <img
-                                    src="/assets/app-screen-1.png" // Add your image path
-                                    alt="Why Choose Us"
-                                    style={{
-                                        maxWidth: "100%",
-                                        height: "auto",
-                                    }}
-                                />
-                            </Box>
+                                <CardContent>
+                                    <Typography
+                                        variant="h5"
+                                        component="h3"
+                                        fontWeight={600}
+                                        gutterBottom
+                                        sx={{
+                                            background:
+                                                "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
+                                            WebkitBackgroundClip: "text",
+                                            WebkitTextFillColor: "transparent",
+                                            mb: 2,
+                                        }}
+                                    >
+                                        {item.title}
+                                    </Typography>
+                                    <Typography
+                                        variant="body1"
+                                        sx={{
+                                            color: "#02225B",
+                                            opacity: 0.8,
+                                            lineHeight: 1.7,
+                                        }}
+                                    >
+                                        {item.description}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Grid container spacing={4}>
-                                {[
-                                    {
-                                        title: "Industry-Leading Expertise",
-                                        description:
-                                            "A team of experienced professionals with deep technical knowledge.",
-                                    },
-                                    {
-                                        title: "Hands-On Innovation",
-                                        description:
-                                            "We develop our own in-house software solutions to stay ahead of trends.",
-                                    },
-                                    {
-                                        title: "End-to-End IT Support",
-                                        description:
-                                            "From consultation to deployment, we manage the entire tech lifecycle.",
-                                    },
-                                    {
-                                        title: "Scalable & Cost-Effective Solutions",
-                                        description:
-                                            "IT solutions tailored for startups, SMEs, and large enterprises.",
-                                    },
-                                ].map((item, index) => (
-                                    <Grid item xs={12} key={index}>
-                                        <Card
-                                            elevation={0}
-                                            sx={{
-                                                height: "100%",
-                                                p: 3,
-                                                background:
-                                                    "rgba(255, 255, 255, 0.7)",
-                                                border: "1px solid rgba(46, 126, 237, 0.1)",
-                                                transition:
-                                                    "all 0.3s ease-in-out",
-                                                "&:hover": {
-                                                    transform:
-                                                        "translateY(-4px)",
-                                                    background:
-                                                        "rgba(255, 255, 255, 0.9)",
-                                                    borderColor:
-                                                        "rgba(46, 126, 237, 0.2)",
-                                                },
-                                            }}
-                                        >
-                                            <CardContent>
-                                                <Typography
-                                                    variant="h5"
-                                                    component="h3"
-                                                    fontWeight={600}
-                                                    gutterBottom
-                                                    sx={{
-                                                        background:
-                                                            "linear-gradient(45deg, #009EC5 0%, #2e7eed 100%)",
-                                                        WebkitBackgroundClip:
-                                                            "text",
-                                                        WebkitTextFillColor:
-                                                            "transparent",
-                                                        mb: 2,
-                                                    }}
-                                                >
-                                                    {item.title}
-                                                </Typography>
-                                                <Typography
-                                                    variant="body1"
-                                                    sx={{
-                                                        color: "#02225B",
-                                                        opacity: 0.75,
-                                                        lineHeight: 1.8,
-                                                    }}
-                                                >
-                                                    {item.description}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Box>
+                    ))}
+                </Grid>
+            </Grid>
+        </Grid>
+    </Container>
+</Box>
+
+
 
             {/* Testimonials Section */}
             <Box sx={{ bgcolor: "rgba(0, 158, 197, 0.03)", py: 8 }}>

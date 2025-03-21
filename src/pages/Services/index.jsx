@@ -1,47 +1,46 @@
 import {
     Box,
-    Button,
     Card,
     CardContent,
     Container,
     Grid,
-    Typography,
+    Typography
 } from "@mui/material";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
-import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { motion } from "framer-motion";
+import React from "react";
 
 const services = [
     {
         title: "Software Development Consulting",
         description:
             "Custom software solutions for startups & enterprises with expertise in modern frameworks, DevOps, and cybersecurity best practices.",
-        image: "/assets/HeroSectionImage.jpeg",
+        image: "/assets/SoftwareDevelopment.jpg",
         icon: <BarChartIcon sx={{ color: "white" }} />,
     },
     {
         title: "Cloud-Based Project Consulting",
         description:
             "Azure & AWS cloud solutions for startups, mid-sized companies, and enterprises needing hybrid & multi-cloud strategies.",
-        image: "/assets/HeroSectionImage.jpeg",
+        image: "/assets/CloudTech.jpg",
         icon: <CloudQueueIcon sx={{ color: "white" }} />,
     },
     {
         title: "ERP Implementation Consulting",
         description:
             "End-to-end ERP support for PeopleSoft, Workday, SAP, and Microsoft Dynamics, ensuring smooth business process automation.",
-        image: "/assets/HeroSectionImage.jpeg",
+        image: "/assets/ERP.jpg",
         icon: <WorkIcon sx={{ color: "white" }} />,
     },
     {
         title: "Project Management Services",
         description:
             "PMP & Agile-certified experts managing IT projects using Scrum, Waterfall, and hybrid methodologies for optimal success.",
-        image: "/assets/HeroSectionImage.jpeg",
+        image: "/assets/Projectmanagement.jpg",
         icon: <AssignmentIcon sx={{ color: "white" }} />,
     },
 ];
