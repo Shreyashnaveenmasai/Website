@@ -25,6 +25,7 @@ const Navbar = () => {
     const [position, setPosition] = useState("absolute");
     const location = useLocation();
     const [activeTab, setActiveTab] = useState(location.pathname);
+    const isHome = activeTab === "/";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -87,18 +88,17 @@ const Navbar = () => {
         </Box>
     );
 
+    console.log("isHome", isHome);
     return (
         <AppBar
             position={position}
             sx={{
                 backgroundColor:
-                    position === "fixed"
+                    position === "fixed" || !isHome
                         ? theme.palette.background.default
                         : "transparent",
-                // borderBottom: position === "fixed" ? 1 : "none",
-                // borderColor: position === "fixed" ? "grey.200" : "none",
                 transition: "all 0.4s ease-in-out",
-                boxShadow: position === "fixed" ? "" : "none",
+                boxShadow: position === "fixed" || !isHome ? "" : "none",
             }}
         >
             <Container maxWidth="lg">
@@ -142,7 +142,8 @@ const Navbar = () => {
                                         color:
                                             activeTab === item.path
                                                 ? theme.palette.primary.main
-                                                : position === "fixed"
+                                                : position === "fixed" ||
+                                                  !isHome
                                                 ? theme.palette.text.primary
                                                 : "#fff",
                                         "&:hover": {

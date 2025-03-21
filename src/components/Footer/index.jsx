@@ -1,152 +1,109 @@
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, Link, Typography } from "@mui/material";
 
-import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { grey } from "@mui/material/colors";
 import { motion } from "framer-motion";
-
-const linkVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
         <Box
-            id="footer"
             component="footer"
             sx={{
-                bgcolor: "grey.900",
-                color: "grey.100",
+                bgcolor: "background.default",
+                color: "primary.dark",
                 py: 6,
-                mt: 10,
+                // mt: 8,
+                borderTop: 1,
+                borderColor: grey[300],
+                boxShadow: "0px -4px 12px rgba(0, 0, 0, 0.08)", // Subtle shadow effect
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
         >
             <Container maxWidth="lg">
                 <Grid
                     container
-                    spacing={8}
+                    spacing={6}
                     component={motion.div}
-                    initial="hidden"
-                    animate="visible"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
                 >
                     {/* Company Info */}
-                    <Grid
-                        item
-                        xs={12}
-                        md={4}
-                        component={motion.div}
-                        variants={linkVariants}
-                    >
-                        <Typography
-                            variant="h6"
-                            fontWeight="bold"
-                            gutterBottom
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom>
                             MADS CONSULTING GROUP LLC
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="grey.300"
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
+                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
                             IT staffing and digital transformation services
                             tailored for businesses of all sizes.
                         </Typography>
                     </Grid>
 
                     {/* Quick Links */}
-                    <Grid
-                        item
-                        xs={12}
-                        md={4}
-                        component={motion.div}
-                        variants={linkVariants}
-                    >
-                        <Typography
-                            variant="h6"
-                            fontWeight="bold"
-                            gutterBottom
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom>
                             Quick Links
                         </Typography>
-                        <nav>
-                            <Box
-                                component="ul"
-                                sx={{
-                                    listStyle: "none",
-                                    p: 0,
-                                    m: 0,
-                                    "& li": {
-                                        mb: 1,
-                                        textAlign: { xs: "center", md: "left" },
-                                    },
-                                }}
-                            >
-                                {["Home", "Services", "About", "Contact"].map(
-                                    (item) => (
-                                        <motion.li
-                                            key={item}
-                                            whileHover={{ scale: 1.1 }}
+                        <Box
+                            component="ul"
+                            sx={{
+                                listStyle: "none",
+                                p: 0,
+                                m: 0,
+                                "& li": { mb: 1 },
+                            }}
+                        >
+                            {["Home", "Services", "About", "Contact"].map(
+                                (item) => (
+                                    <motion.li
+                                        key={item}
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        <Link
+                                            component={RouterLink}
+                                            to={`/${
+                                                item === "Home"
+                                                    ? ""
+                                                    : item.toLowerCase()
+                                            }`}
+                                            sx={{
+                                                color: "primary.main",
+                                                textDecoration: "none",
+                                                fontSize: "0.95rem",
+                                                "&:hover": {
+                                                    textDecoration: "underline",
+                                                },
+                                                transition: "color 0.3s ease",
+                                            }}
                                         >
-                                            <Link
-                                                component={RouterLink}
-                                                to={`/${item.toLowerCase()}`}
-                                                sx={{
-                                                    color: "grey.300",
-                                                    textDecoration: "none",
-                                                    "&:hover": {
-                                                        color: "primary.light",
-                                                    },
-                                                    transition:
-                                                        "color 0.3s ease",
-                                                }}
-                                            >
-                                                {item}
-                                            </Link>
-                                        </motion.li>
-                                    )
-                                )}
-                            </Box>
-                        </nav>
+                                            {item}
+                                        </Link>
+                                    </motion.li>
+                                )
+                            )}
+                        </Box>
                     </Grid>
 
-                    {/* Contact Info & Social Links */}
-                    <Grid
-                        item
-                        xs={12}
-                        md={4}
-                        component={motion.div}
-                        variants={linkVariants}
-                    >
-                        <Typography
-                            variant="h6"
-                            fontWeight="bold"
-                            gutterBottom
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
+                    {/* Contact Info */}
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h6" fontWeight="bold" gutterBottom>
                             Contact Us
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="grey.300"
-                            paragraph
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
-                            Email: support@madsgroup.com
+                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                            Email:{" "}
+                            <Link
+                                href="mailto:support@madsgroup.com"
+                                sx={{
+                                    color: "primary.main",
+                                    textDecoration: "none",
+                                    "&:hover": { textDecoration: "underline" },
+                                }}
+                            >
+                                support@madsgroup.com
+                            </Link>
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="grey.300"
-                            paragraph
-                            sx={{ textAlign: { xs: "center", md: "left" } }}
-                        >
+                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
                             Address: 16220 N Scottsdale Road, Scottsdale,
                             Arizona 85254-USA
                         </Typography>
@@ -154,21 +111,9 @@ const Footer = () => {
                 </Grid>
 
                 {/* Bottom Footer */}
-                <Box
-                    sx={{
-                        mt: 6,
-                        pt: 3,
-                        pb: 3,
-                        borderTop: 1,
-                        borderColor: "grey.700",
-                        textAlign: "center",
-                    }}
-                    component={motion.div}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5 }}
-                >
-                    <Typography variant="body2" color="grey.400">
+                <Divider sx={{ my: 4 }} />
+                <Box sx={{ textAlign: "center" }}>
+                    <Typography variant="body2" sx={{ opacity: 0.7 }}>
                         © {currentYear} MadsGroupSolutions. All rights reserved.
                     </Typography>
                 </Box>
