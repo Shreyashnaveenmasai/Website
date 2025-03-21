@@ -1,8 +1,7 @@
 import { Box, Container, Divider, Grid, Link, Typography } from "@mui/material";
 
-import { Link as RouterLink } from "react-router-dom";
-import { grey } from "@mui/material/colors";
 import { motion } from "framer-motion";
+import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -11,30 +10,46 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                bgcolor: "background.default",
-                color: "primary.dark",
-                py: 6,
-                // mt: 8,
-                borderTop: 1,
-                borderColor: grey[300],
-                boxShadow: "0px -4px 12px rgba(0, 0, 0, 0.08)", // Subtle shadow effect
+                bgcolor: "#02225B",
+                color: "#ffffff",
+                py: 8,
+                position: "relative",
+                "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "linear-gradient(45deg, rgba(0, 158, 197, 0.1) 0%, rgba(46, 126, 237, 0.1) 100%)",
+                    zIndex: 0,
+                },
             }}
         >
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
                 <Grid
                     container
                     spacing={6}
                     component={motion.div}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 0.8 }}
                 >
                     {/* Company Info */}
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                        <Typography 
+                            variant="h6" 
+                            fontWeight="bold" 
+                            gutterBottom
+                            sx={{
+                                background: "linear-gradient(45deg, #00d9ff 0%, #009EC5 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                            }}
+                        >
                             MADS CONSULTING GROUP LLC
                         </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                        <Typography variant="body2" sx={{ opacity: 0.9 }}>
                             IT staffing and digital transformation services
                             tailored for businesses of all sizes.
                         </Typography>
@@ -42,7 +57,16 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                        <Typography 
+                            variant="h6" 
+                            fontWeight="bold" 
+                            gutterBottom
+                            sx={{
+                                background: "linear-gradient(45deg, #00d9ff 0%, #009EC5 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                            }}
+                        >
                             Quick Links
                         </Typography>
                         <Box
@@ -51,14 +75,15 @@ const Footer = () => {
                                 listStyle: "none",
                                 p: 0,
                                 m: 0,
-                                "& li": { mb: 1 },
+                                "& li": { mb: 1.5 },
                             }}
                         >
                             {["Home", "Services", "About", "Contact"].map(
                                 (item) => (
                                     <motion.li
                                         key={item}
-                                        whileHover={{ scale: 1.05 }}
+                                        whileHover={{ x: 5 }}
+                                        transition={{ duration: 0.2 }}
                                     >
                                         <Link
                                             component={RouterLink}
@@ -68,11 +93,11 @@ const Footer = () => {
                                                     : item.toLowerCase()
                                             }`}
                                             sx={{
-                                                color: "primary.main",
+                                                color: "#00d9ff",
                                                 textDecoration: "none",
                                                 fontSize: "0.95rem",
                                                 "&:hover": {
-                                                    textDecoration: "underline",
+                                                    color: "#009EC5",
                                                 },
                                                 transition: "color 0.3s ease",
                                             }}
@@ -87,23 +112,35 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                        <Typography 
+                            variant="h6" 
+                            fontWeight="bold" 
+                            gutterBottom
+                            sx={{
+                                background: "linear-gradient(45deg, #00d9ff 0%, #009EC5 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                            }}
+                        >
                             Contact Us
                         </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                        <Typography variant="body2" sx={{ opacity: 0.9, mb: 1 }}>
                             Email:{" "}
                             <Link
                                 href="mailto:support@madsgroup.com"
                                 sx={{
-                                    color: "primary.main",
+                                    color: "#00d9ff",
                                     textDecoration: "none",
-                                    "&:hover": { textDecoration: "underline" },
+                                    "&:hover": { 
+                                        color: "#009EC5",
+                                    },
+                                    transition: "color 0.3s ease",
                                 }}
                             >
                                 support@madsgroup.com
                             </Link>
                         </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                        <Typography variant="body2" sx={{ opacity: 0.9 }}>
                             Address: 16220 N Scottsdale Road, Scottsdale,
                             Arizona 85254-USA
                         </Typography>
@@ -111,7 +148,7 @@ const Footer = () => {
                 </Grid>
 
                 {/* Bottom Footer */}
-                <Divider sx={{ my: 4 }} />
+                <Divider sx={{ my: 4, borderColor: "rgba(255, 255, 255, 0.1)" }} />
                 <Box sx={{ textAlign: "center" }}>
                     <Typography variant="body2" sx={{ opacity: 0.7 }}>
                         © {currentYear} MadsGroupSolutions. All rights reserved.
